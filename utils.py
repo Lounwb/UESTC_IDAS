@@ -15,18 +15,13 @@ def get_horizontal_distance(bigImage):
     cv2.namedWindow("Image")
     cv2.imshow("Image", image)
 
-    points = []
-
     def mouse_callback(event, x, y, flags, param):
         nonlocal distance
         if event == cv2.EVENT_LBUTTONDOWN:
-            points.append((x, y))
+            distance = x
             cv2.circle(image, (x, y), 3, (0, 0, 255), -1)
             cv2.imshow("Image", image)
-
-            if len(points) == 2:
-                distance = abs(points[1][0] - points[0][0])
-                cv2.destroyAllWindows()
+            cv2.destroyAllWindows()
 
     cv2.setMouseCallback("Image", mouse_callback)
 

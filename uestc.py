@@ -26,7 +26,7 @@ class IdasUESTC():
             'Sec-Fetch-User': '?1',
         }
         self.cookies = {
-            'org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE': 'zn_CN',
+            'org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE': 'zh_CN',
             'route': '',
             'JSESSIONID': '',
         }
@@ -40,7 +40,8 @@ class IdasUESTC():
         response = requests.get(url, headers=self.headers, params=params)
         if response.status_code == 200:
             page = response.text
-        salt = re.findall('var pwdDefaultEncryptSalt = "(.*?)";', page)[0]
+        # salt = re.findall('var pwdDefaultEncryptSalt = "(.*?)";', page)[0]
+        salt = re.search(r'var pwdDefaultEncryptSalt = "([^"]+)"', page).group(1)
         lt = re.search(r'name="lt" value="([^"]+)"', page).group(1)
         execution = re.search(r'name="execution" value="([^"]+)"', page).group(1)
 
