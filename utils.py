@@ -12,20 +12,22 @@ def get_horizontal_distance(bigImage):
     if image is None:
         return
 
-    cv2.namedWindow("Image")
-    cv2.imshow("Image", image)
+    cv2.namedWindow("Slider Capcha")
+    cv2.setWindowProperty("Slider Capcha", cv2.WND_PROP_TOPMOST, 1)
+
+    cv2.imshow("Slider Capcha", image)
 
     def mouse_callback(event, x, y, flags, param):
         nonlocal distance
         if event == cv2.EVENT_LBUTTONDOWN:
             distance = x
             cv2.circle(image, (x, y), 3, (0, 0, 255), -1)
-            cv2.imshow("Image", image)
+            cv2.imshow("Slider Capcha", image)
             cv2.destroyAllWindows()
 
-    cv2.setMouseCallback("Image", mouse_callback)
+    cv2.setMouseCallback("Slider Capcha", mouse_callback)
 
     cv2.waitKey(0)
 
     cv2.destroyAllWindows()
-    return distance/2
+    return distance//2
